@@ -19,6 +19,9 @@ score
 - checkAlive
 - function to place new apple in random position when snake eats one
 - function to update snake length after eating apple
+- function to check isAlive
+    - if isAlive is true, game is still active
+    - if isAlive is false, game is over
 */
 /* ----------------------------- CACHED ELEMENTS ---------------------------- */
 /*
