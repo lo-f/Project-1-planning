@@ -41,8 +41,6 @@ let snake = [
     {x:240, y:200},
 ]
 
-let snakeHead = snake[0];
-
 function drawSnake() {
     snake.forEach(drawSnakeBody);
 }
@@ -55,8 +53,8 @@ function drawSnakeBody (snakeBody) {
     // ctx.fillRect(300, 200, 1, -100);
     // ctx.strokeRect(300, 200, 1, 1);
 }
-
 drawSnake()
+
 
 /* ----------------------------- CACHED ELEMENTS ---------------------------- */
 
@@ -71,8 +69,22 @@ drawSnake()
 // Snake Movement --------------------------
 
 function snakeMovement () {
-    const snakeHead = {x: snake[0].x, y: snake[0].y}
+    const snakeHead = {x: snake[0].x + 10, y: snake[0].y + 10}
+    snake.unshift(snakeHead);
+    snake.pop();
+    
 }
+function init () {
+    setTimeout(function onMilli() {
+        snakeMovement();
+        drawSnake();
+        init();
+    }, 1000)
+}
+init();;
+
+// snakeMovement()
+// drawSnake()
 
 // snakeMovement();
 // // drawSnake();;
