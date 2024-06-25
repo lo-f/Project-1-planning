@@ -1,7 +1,7 @@
 /* -------------------------------- CONSTANT -------------------------------- */
 
 const canvas = document.getElementById("gameArea")
-const ctx = gameArea.getContext("2d")
+const ctx = gameArea.getContext("2d");
 ctx.lineWidth = 20;
 
 /* ----------------------------- STATE VARIABLE ----------------------------- */
@@ -16,11 +16,11 @@ function drawApple () {
     let apple_y;
     ctx.fillStyle = 'red';
     ctx.strokeStyle = 'red';
-    ctx.fillRect(apple_x, apple_y, 100, 100);
-    ctx.strokeRect(apple_x, apple_y, 100, 100);
+    ctx.fillRect(apple_x, apple_y , 10, 10);
+    ctx.strokeRect(apple_x, apple_y, 10, 10);
 }
 
-drawApple ();
+// drawApple ();
 
 
 
