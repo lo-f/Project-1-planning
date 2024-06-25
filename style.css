@@ -11,7 +11,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%); */
     background-color: green;
-    border: 5px solid rgb(0, 60, 0)
+    border: 2.5px solid rgb(0, 60, 0)
   }
 .content {
     display: flex;
