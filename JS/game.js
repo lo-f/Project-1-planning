@@ -2,6 +2,10 @@
 
 const canvas = document.getElementById("gameArea")
 const ctx = gameArea.getContext("2d");
+let dx = 10;
+let dy = 0;
+let changingDirection = false;
+let isAlive = false;
 
 /* ----------------------------- STATE VARIABLE ----------------------------- */
 
@@ -28,15 +32,16 @@ function drawApple () {
     // ctx.strokeRect(0, 0, 10, 10);
     console.log(apple_x, apple_y);
 }
-drawApple ();
+// drawApple ();
 
 // Clear Snake ------------------
 function clearGameArea () {
     ctx.fillStyle = 'green';
-    ctx.strokeStyle = 'red';
+    ctx.strokeStyle = 'green';
     ctx.fillRect(0, 0, 600, 400);
     ctx.strokeRect(0, 0, 600, 400);
 }
+
 
 // Draw Snake------------
 let snake = [
@@ -63,6 +68,28 @@ function drawSnakeBody (snakeBody) {
 }
 drawSnake()
 
+// WINNING AND LOSING--------------------------------------
+function checkIntersect () {
+    for (let i = 1; i < snake.length; i++) {
+        const selfIntersect =
+        snake[0].x === snake[i].x && 
+        snake[0].y === snake[i].y
+        if (selfIntersect) {
+            return true
+        }
+    };
+
+    if ((snake[0].x > canvas.width)
+        || (snake[0].x < 0)
+        || (snake[0].y > canvas.height - 10)
+        || (snake[0].y < 0)
+        || (snake[0].x > canvas.width - 10)) {
+       return
+    }
+}
+
+
+
 
 /* ----------------------------- CACHED ELEMENTS ---------------------------- */
 
@@ -70,29 +97,68 @@ drawSnake()
 
 /* ----------------------------- EVENT LISTENERS ---------------------------- */
 
-
-
+// Direction inputs
+document.addEventListener("keydown", changeDirection);
+function changeDirection (e) {
+    const keypressed = e.keyCode;
+    const left = 37;
+    const up = 38;
+    const right = 39;
+    const down = 40;
+    const goLeft = dx === (-10);
+    const goUp = dy === (-10);
+    const goRight = dx === (10);
+    const goDown = dy === (10);
+    if (changingDirection) return;
+    changingDirection = true;
+    if (keypressed === left && !goRight) {
+        dx = (-10);
+        dy = 0;
+    };
+    if (keypressed === up && !goDown) {
+        dx = 0;
+        dy = (-10);
+    };
+    if (keypressed === right && !goLeft) {
+        dx = 10;
+        dy = 0;
+    };
+    if (keypressed === down && !goUp) {
+        dx = 0;
+        dy = 10;
+    };
+    
+    // console.log(e)
+}
 
 
 // Snake Movement --------------------------
 
 function snakeMovement () {
-    const dx = 10;
-    const dy = 10;
-    const snakeHead = {x: snake[0].x + dx, y: snake[0].y + dy}
+    const snakeHead = {x: snake[0].x + dx, y: snake[0].y + dy};
     snake.unshift(snakeHead);
     snake.pop();
-    
 }
+
+
+
 function init () {
     setTimeout(function onMilli() {
+        // drawApple();
+        lost = false;
+        isAlive = true;
+        changingDirection = false;
         clearGameArea();
         snakeMovement();
         drawSnake();
+        checkIntersect();
         init();
     }, 100)
 }
+
+
 init();
+
 
 // snakeMovement()
 // drawSnake()
