@@ -30,6 +30,14 @@ function drawApple () {
 }
 drawApple ();
 
+// Clear Snake ------------------
+function clearGameArea () {
+    ctx.fillStyle = 'green';
+    ctx.strokeStyle = 'red';
+    ctx.fillRect(0, 0, 600, 400);
+    ctx.strokeRect(0, 0, 600, 400);
+}
+
 // Draw Snake------------
 let snake = [
     {x:300, y:200},
@@ -69,19 +77,22 @@ drawSnake()
 // Snake Movement --------------------------
 
 function snakeMovement () {
-    const snakeHead = {x: snake[0].x + 10, y: snake[0].y + 10}
+    const dx = 10;
+    const dy = 10;
+    const snakeHead = {x: snake[0].x + dx, y: snake[0].y + dy}
     snake.unshift(snakeHead);
     snake.pop();
     
 }
 function init () {
     setTimeout(function onMilli() {
+        clearGameArea();
         snakeMovement();
         drawSnake();
         init();
-    }, 1000)
+    }, 100)
 }
-init();;
+init();
 
 // snakeMovement()
 // drawSnake()
