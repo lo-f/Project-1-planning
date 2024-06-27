@@ -3,21 +3,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "Coiny", system-ui;
 }
 
 #gameArea {
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    background-color: green;
+    background-position-x: rgb(106, 134, 45);
     border: 7px solid rgb(0, 60, 0)
-  }
+}
 .content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
+    color: rgb(92, 53, 46)
 }
 #title {
     text-align: center;
@@ -36,3 +34,17 @@ body {
     text-align: left;
     font-size: 30px;
 }   
+
+#newGame {
+    font-family: "Coiny", system-ui;
+    font-size: 30px;
+    color: rgb(92, 53, 46);
+    background-color: rgb(245, 90, 62)
+}
+
+.coiny-regular {
+    font-family: "Coiny", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
