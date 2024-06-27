@@ -15,6 +15,7 @@ let snake = [
     {x:240, y:200},
 ]
 let score = 0;
+let hiscore = 0;
 let gameRunning = false;
 
 /* ----------------------------- STATE VARIABLE ----------------------------- */
@@ -85,6 +86,14 @@ function displayGameOver () {
     ctx.fillText('GAME OVER', canvas.width/2, canvas.height/2);
 }
 
+function updateHiScore () {
+    if (score > hiscore) 
+        {
+            hiscore = score;
+            hiScoreEl.textContent = `high score: ${hiscore}`;
+        }
+    return updateHiScore;
+}
 
 function checkIntersect () {
     for (let i = 1; i < snake.length; i++) {
@@ -109,6 +118,7 @@ function checkIntersect () {
         return true;
         gameRunning === false;
     }
+    updateHiScore();
 }
 
 
@@ -152,6 +162,7 @@ function changeDirection (e) {
     // console.log(e)
 }
 // Scoreboard --------------------
+const hiScoreEl = document.querySelector('#hiscore');
 const scoreboardEl = document.querySelector('#scoreboard');
 
 // Snake Movement --------------------------
