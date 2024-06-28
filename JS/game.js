@@ -6,21 +6,17 @@ let dx = 10;
 let dy = 0;
 let changingDirection = false;
 let snake = [
-    {x:300, y:200},
-    {x:290, y:200},
-    {x:280, y:200},
-    {x:270, y:200},
-    {x:260, y:200},
-    {x:250, y:200},
-    {x:240, y:200},
-]
+    {x:200, y:100},
+    {x:190, y:100},
+    {x:180, y:100},
+    {x:170, y:100},
+    {x:160, y:100},
+    {x:150, y:100},
+    {x:140, y:100},
+];
 let score = 0;
 let hiscore = 0;
 let gameRunning = false;
-
-/* ----------------------------- STATE VARIABLE ----------------------------- */
-
-
 
 /* -------------------------------- FUNCTIONS ------------------------------- */
 
@@ -41,11 +37,6 @@ function makeApple () {
     console.log(apple_x, apple_y);
 }
 makeApple();
-// let apple_x= 590
-// let apple_y=390
-// ctx.fillRect(0, 0 , 10, 10);
-// ctx.strokeRect(0, 0, 10, 10);
-
 
 function drawApple (){
 ctx.fillStyle = `rgb(219, 33, 0)`;
@@ -60,9 +51,7 @@ function clearGameArea () {
     ctx.strokeStyle = `rgb(106, 134, 45)`;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.strokeRect(0, 0, canvas.width, canvas.height);
-    // console.log('cleared')
 }
-
 
 function drawSnake() {
     snake.forEach(drawSnakeBody);
@@ -73,11 +62,7 @@ function drawSnakeBody (snakeBody) {
     ctx.strokeStyle = `rgb(0, 60, 0)`;
     ctx.fillRect(snakeBody.x, snakeBody.y, 10, 10);
     ctx.strokeRect(snakeBody.x, snakeBody.y, 10, 10);
-    // ctx.fillRect(300, 200, 1, -100);
-    // ctx.strokeRect(300, 200, 1, 1);
 }
-// drawSnake()
-
 // WINNING AND LOSING--------------------------------------
 function displayGameOver () {
     ctx.font = `60px Coiny` ;
@@ -121,14 +106,9 @@ function checkIntersect () {
     updateHiScore();
 }
 
-
-/* ----------------------------- CACHED ELEMENTS ---------------------------- */
-
-
-
 /* ----------------------------- EVENT LISTENERS ---------------------------- */
 
-// Direction inputs
+// Direction inputs ---------
 document.addEventListener("keydown", changeDirection);
 function changeDirection (e) {
     const keypressed = e.keyCode;
@@ -158,9 +138,8 @@ function changeDirection (e) {
         dx = 0;
         dy = 10;
     };
-  
-    // console.log(e)
-}
+};
+
 // Scoreboard --------------------
 const hiScoreEl = document.querySelector('#hiscore');
 const scoreboardEl = document.querySelector('#scoreboard');
@@ -184,8 +163,7 @@ function snakeMovement () {
     snake.pop();}
 }
 
-
-
+//Main Functions ----------------------------
 function preGame () {
     clearGameArea();
     drawSnake();
@@ -201,39 +179,27 @@ function init () {
         snakeMovement();
         drawSnake();
         init();
-    }, 75)
+    }, 60)
 }
-// init();
 
 function newGame () {
     dx = 10;
     dy = 0;
     snake = [
-    {x:300, y:200},
-    {x:290, y:200},
-    {x:280, y:200},
-    {x:270, y:200},
-    {x:260, y:200},
-    {x:250, y:200},
-    {x:240, y:200},
-];
+        {x:200, y:100},
+        {x:190, y:100},
+        {x:180, y:100},
+        {x:170, y:100},
+        {x:160, y:100},
+        {x:150, y:100},
+        {x:140, y:100},
+    ];
     score = 0;
     scoreboardEl.textContent = 'score: ' + score;
     makeApple();
     init();
 }
 
-
 // Start Game Function
 const newGameEl = document.getElementById('newGame');
 newGameEl.addEventListener('click', newGame);
-
-
-
-
-
-// snakeMovement()
-// drawSnake()
-
-// snakeMovement();
-// // drawSnake();;

@@ -41,6 +41,11 @@ body {
     color: rgb(92, 53, 46);
     background-color: rgb(245, 90, 62)
 }
+p {
+    font-optical-sizing: auto;
+    font-size:100%;
+    text-align: center;
+}
 
 .coiny-regular {
     font-family: "Coiny", system-ui;
