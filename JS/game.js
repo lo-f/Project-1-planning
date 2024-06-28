@@ -17,6 +17,7 @@ let snakeParts = [
 let score = 0;
 let hiscore = 0;
 let gameRunning = false;
+let tickSpeed = 60;
 
 /* -------------------------------- FUNCTIONS ------------------------------- */
 
@@ -35,7 +36,6 @@ function makeApple () {
             {makeApple();}
     });
 };
-makeApple();
 
 function drawApple (){
 ctx.fillStyle = `rgb(219, 33, 0)`;
@@ -143,6 +143,12 @@ function changeDirection (e) {
 const hiScoreEl = document.querySelector('#hiscore');
 const scoreboardEl = document.querySelector('#scoreboard');
 
+function increaseSpeed () {
+    if (score % 5 === 0) {
+       (tickSpeed = tickSpeed * (0.93));
+    };
+}
+
 // Snake Movement --------------------------
 function snakeMovement () {
     const snakeHead = {x: snakeParts[0].x + dx, y: snakeParts[0].y + dy};
@@ -157,14 +163,15 @@ function snakeMovement () {
     if (ateApple) {
         makeApple();
         updateScore();
-        console.log(score)
-    } else {
+        increaseSpeed();
+         } else {
     snakeParts.pop();}
 }
 
 // MAIN FUNCTIONS ----------------------------
 function preGame () {
     clearGameArea();
+    makeApple();
     drawSnake();
 }
 preGame();
@@ -178,7 +185,7 @@ function init () {
         snakeMovement();
         drawSnake();
         init();
-    }, 60)
+    }, tickSpeed)
 }
 
 function newGame () {
