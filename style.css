@@ -7,7 +7,7 @@ body {
 }
 
 #gameArea {
-    background-position-x: rgb(106, 134, 45);
+    background-position-x: rgb(73, 99, 33);
     border: 7px solid rgb(0, 60, 0)
 }
 .content {
@@ -38,7 +38,7 @@ body {
 #newGame {
     font-family: "Coiny", system-ui;
     font-size: 30px;
-    color: rgb(92, 53, 46);
+    color: rgb(87, 1, 1);
     background-color: rgb(245, 90, 62)
 }
 p {

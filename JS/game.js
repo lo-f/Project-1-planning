@@ -1,11 +1,11 @@
 /* -------------------------------- CONSTANT -------------------------------- */
 
-const canvas = document.getElementById("gameArea")
+const canvas = document.getElementById("gameArea");
 const ctx = gameArea.getContext("2d");
 let dx = 10;
 let dy = 0;
 let changingDirection = false;
-let snake = [
+let snakeParts = [
     {x:200, y:100},
     {x:190, y:100},
     {x:180, y:100},
@@ -23,19 +23,18 @@ let gameRunning = false;
 // Apple Randomizer
 function randomApple (min, max) {
     return Math.round((Math.random() * ((max-min)+min) / 10) * 10); 
-}
+};
 
 // Make Apple---------
 function makeApple () {
     apple_x = randomApple(0, (canvas.width - 10)/10)*10;
     apple_y = randomApple(0, (canvas.height - 10)/10)*10;
-    snake.forEach((eatingApple) => {
+    snakeParts.forEach((eatingApple) => {
         const ateApple = eatingApple.x === apple_x && eatingApple.y === apple_y;
         if (ateApple) 
             {makeApple();}
     });
-    console.log(apple_x, apple_y);
-}
+};
 makeApple();
 
 function drawApple (){
@@ -47,14 +46,14 @@ ctx.strokeRect(apple_x, apple_y, 10, 10);
 
 // Clear Snake ------------------
 function clearGameArea () {
-    ctx.fillStyle = `rgb(106, 134, 45)`;
+    ctx.fillStyle = `rgb(73, 99, 33)`;
     ctx.strokeStyle = `rgb(106, 134, 45)`;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.strokeRect(0, 0, canvas.width, canvas.height);
 }
 
 function drawSnake() {
-    snake.forEach(drawSnakeBody);
+    snakeParts.forEach(drawSnakeBody);
 }
 
 function drawSnakeBody (snakeBody) {
@@ -81,10 +80,10 @@ function updateHiScore () {
 }
 
 function checkIntersect () {
-    for (let i = 1; i < snake.length; i++) {
+    for (let i = 1; i < snakeParts.length; i++) {
         const selfIntersect =
-        snake[0].x === snake[i].x && 
-        snake[0].y === snake[i].y
+        snakeParts[0].x === snakeParts[i].x && 
+        snakeParts[0].y === snakeParts[i].y
         if (selfIntersect) {
             displayGameOver();
             return true;
@@ -93,11 +92,11 @@ function checkIntersect () {
         }
     };
 
-    if ((snake[0].x > canvas.width)
-        || (snake[0].x < 0)
-        || (snake[0].y > canvas.height - 10)
-        || (snake[0].y < 0)
-        || (snake[0].x > canvas.width - 10)) {
+    if ((snakeParts[0].x > canvas.width)
+        || (snakeParts[0].x < 0)
+        || (snakeParts[0].y > canvas.height - 10)
+        || (snakeParts[0].y < 0)
+        || (snakeParts[0].x > canvas.width - 10)) {
             displayGameOver();
         // console.log('lost');
         return true;
@@ -146,9 +145,9 @@ const scoreboardEl = document.querySelector('#scoreboard');
 
 // Snake Movement --------------------------
 function snakeMovement () {
-    const snakeHead = {x: snake[0].x + dx, y: snake[0].y + dy};
-    snake.unshift(snakeHead);
-    const ateApple = snake[0].x === apple_x && snake[0].y === apple_y;
+    const snakeHead = {x: snakeParts[0].x + dx, y: snakeParts[0].y + dy};
+    snakeParts.unshift(snakeHead);
+    const ateApple = snakeParts[0].x === apple_x && snakeParts[0].y === apple_y;
     const updateScore = () => {
     if (ateApple) {
         score += 7
@@ -160,10 +159,10 @@ function snakeMovement () {
         updateScore();
         console.log(score)
     } else {
-    snake.pop();}
+    snakeParts.pop();}
 }
 
-//Main Functions ----------------------------
+// MAIN FUNCTIONS ----------------------------
 function preGame () {
     clearGameArea();
     drawSnake();
@@ -185,7 +184,7 @@ function init () {
 function newGame () {
     dx = 10;
     dy = 0;
-    snake = [
+    snakeParts = [
         {x:200, y:100},
         {x:190, y:100},
         {x:180, y:100},
