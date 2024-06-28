@@ -17,7 +17,6 @@ https://lo-f.github.io/snakegame.js/
 4. If the snake hits the boundary, the player will lose
 5. If the snake hits any part of itself, the player will lose
 
-## Future Enhansements
+## Future Enhancements
 - will add functionality to allow user to start the game by pressing any arrow key
-- will add speed increases to increase difficulty throughout gameplay
 - will add difficulty settings
