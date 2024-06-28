@@ -1,4 +1,4 @@
-![screenshot of snake game with highscore: 784](/README/image.png)
+![screenshot of snake game with highscore: 784](/Misc_Files/image.png)
 
 # SnakeGame.js
 
